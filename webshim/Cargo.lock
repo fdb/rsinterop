@@ -1,0 +1,11 @@
+[root]
+name = "webshim"
+version = "0.1.0"
+dependencies = [
+ "mesh 0.1.0",
+]
+
+[[package]]
+name = "mesh"
+version = "0.1.0"
+

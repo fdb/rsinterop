@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rsinterop</title>
+    <style>html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; text-align: center; font: 18px sans-serif; color: #666; } </style>
+</head>
+<body>
+<h1>Open the console.</h1>
+<script>
+function main() {
+    let triangle = Module._mesh_create_triangle();
+    console.log('Address of triangle mesh:', triangle);
+    let positions = Module._mesh_get_positions(triangle);
+    console.log('Address of triangle positions:', positions);
+}
+var Module = {
+    wasmBinaryFile: 'build/site.wasm',
+    onRuntimeInitialized: main
+};
+</script>
+<script src="build/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+[package]
+name = "webshim"
+version = "0.1.0"
+authors = ["Frederik De Bleser <frederik@debleser.be>"]
+
+[dependencies]
+mesh = { path = "../mesh" }
