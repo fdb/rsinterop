@@ -9,10 +9,26 @@
 <h1>Open the console.</h1>
 <script>
 function main() {
+    class Vector3 {
+        constructor(x, y, z) {
+            this.x = x; this.y = y; this.z = z;
+        }
+    }
+
     let triangle = Module._mesh_create_triangle();
     console.log('Address of triangle mesh:', triangle);
-    let positions = Module._mesh_get_positions(triangle);
-    console.log('Address of triangle positions:', positions);
+    let position_box_ptr = Module._mesh_get_positions(triangle);
+    let positions_ptr = Module.HEAPU32[position_box_ptr / 4] / 4;
+    console.log('Address of triangle positions:', positions_ptr);
+    let positions = [];
+    for (let i = 0; i < 3; i++) {
+        let x = Module.HEAPF32[positions_ptr++];
+        let y = Module.HEAPF32[positions_ptr++];
+        let z = Module.HEAPF32[positions_ptr++];
+        positions.push(new Vector3(x, y, z));
+    }
+
+    console.log('Positions:', positions);
 }
 var Module = {
     wasmBinaryFile: 'build/site.wasm',

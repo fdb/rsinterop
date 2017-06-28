@@ -11,14 +11,14 @@ struct Vector3 {
 
 extern "C" {
     Mesh* mesh_create_triangle();
-    Vector3* mesh_get_positions(Mesh* mesh); // TODO need position out parameter
+    Vector3** mesh_get_positions(Mesh* mesh); // TODO need position out parameter
 }
 
 void main() {
     Mesh* mesh = mesh_create_triangle();
-    Vector3* positions = mesh_get_positions(mesh);
+    Vector3* positions = *mesh_get_positions(mesh);
     for (int i = 0; i < 3; i++) {
-        Vector3* pos = &positions[i];
-        printf("%d: [%.2f, %.2f, %.2f]\n", i, pos->x, pos->y, pos->z);
+        Vector3 pos = positions[i];
+        printf("%d: [%.2f, %.2f, %.2f]\n", i, pos.x, pos.y, pos.z);
     }
 }
